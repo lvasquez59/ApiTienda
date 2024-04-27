@@ -16,4 +16,8 @@ class Detalles extends Model
     public $incrementing = false;
     public $timestamps = false;
     
+    public function producto(): HasOne
+    {
+        return $this->hasOne(producto::class,'id_producto','id_producto');
+    }
 }

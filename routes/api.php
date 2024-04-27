@@ -21,4 +21,4 @@ use App\Http\Controllers\VentasController;
 // });
 
 Route::resource("producto", ProductoController::class)->only('index','store','show','update','destroy');
-Route::resource("ventas", VentasController::class)->only('store','show');
+Route::resource("ventas", VentasController::class)->only('store','index');

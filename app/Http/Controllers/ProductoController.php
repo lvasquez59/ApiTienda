@@ -29,7 +29,9 @@ class ProductoController extends ApiController{
     }
 
     public function show(String $producto){
+        if(strcmp($producto,'pesado')==0) return producto::whereRaw('codigo ~ \'[a-z]\'')->get();
         return producto::where('codigo',$producto)->firstOrFail();
+
     }
 
     public function update(Request $request, producto $producto){

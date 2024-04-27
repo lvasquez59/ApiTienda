@@ -11,18 +11,12 @@ use Illuminate\Support\Arr;
 class VentasController extends Controller
 {
     
-    // public function index(Request $request){
-    //     $query = Producto::whereRaw('lower(producto) like lower(\'%' . $request->producto . '%\')');
-    //     if ($request->has('marca')) $query->whereRaw('lower(marca) like lower(\'%' . $request->marca . '%\')');
-        
-    //     return $query->paginate(10);
-    // }
-
-    public function show(Ventas $venta){
-        $venta->detalles;
-        return $venta;
+    public function index(Request $request){
+        $request->validate(['fInicial' =>  'date',
+                            'fFinal' =>  'date']);
+        return Ventas::with('detalles.producto')->whereBetween('created_at', [$request->fInicial, $request->fFinal])->paginate(10);
     }
-
+    
     public function store(VentasRequest $request){
          $venta = Ventas::create([
             'total_producto'=>$request->total_producto,
